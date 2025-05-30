@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.pause-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Poloprůhledné pozadí, aby bylo vidět hru */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Vysoký z-index, aby byl nad hrou */
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff7f; /* Neonově zelená */
+}
+
+.pause-container {
+    text-align: center;
+    background: #111; /* Tmavé pozadí boxu */
+    padding: 40px;
+    border: 2px solid #00ff7f; /* Neonový okraj */
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00ff7f; /* Zářící stín */
+    width: 90%;
+    max-width: 400px;
+    display: flex; /* Použijeme flexbox pro rozložení obsahu */
+    flex-direction: column;
+    gap: 20px; /* Mezera mezi prvky */
+}
+
+.pause-title {
+    font-size: 2em; /* Větší nadpis */
+    margin-bottom: 20px;
+    color: #00ff7f;
+    text-shadow: 0 0 15px #00ff7f; /* Neonový text */
+}
+
+/* Styly pro tlačítka v pauze */
+.pause-button {
+    background: rgba(0, 255, 127, 0.2); /* Průhlednější pozadí tlačítka */
+    border: 2px solid #00ff7f;
+    padding: 15px 25px; /* Větší padding */
+    color: white;
+    font-size: 1.1em; /* Větší font */
+    margin: 0; /* Odstraníme margin, pokud je v flex kontejneru */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 5px #00ff7f;
+}
+
+.pause-button:hover {
+    background: rgba(0, 255, 127, 0.5);
+    box-shadow: 0 0 15px #00ff7f;
+    transform: scale(1.03);
+}

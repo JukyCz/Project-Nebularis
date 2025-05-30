@@ -1,0 +1,81 @@
+.upgrades-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Tmavé pozadí */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Aby bylo okno nad ostatním obsahem */
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff7f;
+}
+
+.upgrades-container {
+    background: #111;
+    padding: 40px;
+    border: 2px solid #00ff7f;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00ff7f; /* Neonový efekt */
+    text-align: center;
+    width: 90%;
+    max-width: 700px; /* Ještě trošku zvětšíme šířku */
+}
+
+.upgrades-title {
+    font-size: 2em;
+    margin-bottom: 30px; /* Větší mezera pod nadpisem */
+    color: #00ff7f;
+    text-shadow: 0 0 15px #00ff7f; /* Neonový text */
+}
+
+.upgrades-table {
+    width: 100%;
+    margin: 0 auto 20px;
+}
+
+.upgrade-row {
+    display: flex; /* Použijeme flexbox pro rozložení v řádku */
+    align-items: flex-start; /* Zarovnáme položky na začátek */
+    width: 100%;
+    margin-bottom: 20px; /* Větší mezera mezi řádky */
+}
+
+.upgrade-name {
+    font-weight: bold;
+    text-align: center; /* Zarovnáme název na střed rámečku */
+    color: white;
+    flex-basis: 30%;
+    border: 2px solid #00ff7f; /* Změna barvy rámečku na zelenou */
+    padding: 10px; /* Vnitřní odsazení rámečku */
+    border-radius: 10px; /* Zaoblení rohů rámečku */
+    box-sizing: border-box; /* Zahrneme padding a border do šířky */
+    margin-right: 20px; /* Odsazení od popisu */
+}
+
+.upgrade-description {
+    text-align: left;
+    color: lightgray;
+    font-size: 0.8em;
+    flex-basis: 70%;
+}
+
+.back-to-menu-button {
+    background: rgba(0, 255, 127, 0.2);
+    border: 2px solid #00ff7f;
+    padding: 10px 20px;
+    color: white;
+    font-size:1em;
+    margin-top: 20px; /* Trochu větší mezera nad tlačítkem */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.back-to-menu-button:hover {
+    background: rgba(0, 255, 127, 0.5);
+    transform: scale(1.05);
+}

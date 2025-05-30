@@ -1,0 +1,581 @@
+/* src/styles/Menu.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- ZÁKLADNÍ NASTAVENÍ PRO ŠKÁLOVÁNÍ A FONT --- */
+html {
+    /* ŠKÁLOVÁNÍ FONTU PRO MALÉ OBRAZOVKY
+       Minimum na 7px,
+       Maximum na 16px
+    */
+    font-size: clamp(7px, 0.35vw + 0.55vh, 16px);
+}
+
+body {
+    margin: 0;
+    overflow: hidden; /* Zabrání posuvníkům pro celý body */
+    background: black;
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff7f;
+}
+
+.menu-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+    padding: clamp(0.5vh, 1vh, 10px) 0;
+    box-sizing: border-box;
+    /* umožní menu-containeru flexibilně se zmenšovat */
+    min-height: 0;
+    flex-shrink: 1;
+}
+
+.menu-title {
+    font-size: clamp(1.8rem, 3.2vw, 45px); /* Mírně zmenšeno */
+    text-shadow: 0px 0px 15px #00ff7f;
+    margin-bottom: clamp(0.8rem, 1.5vh, 20px);
+}
+
+.menu-buttons {
+    margin-top: clamp(0.6rem, 1vh, 20px);
+}
+
+.menu-button {
+    background: rgba(0, 255, 127, 0.6);
+    border: 2px solid #00ff7f;
+    padding: clamp(0.4rem, 0.9vh, 12px) clamp(1.2rem, 3vw, 35px); /* Mírně zmenšeno */
+    font-size: clamp(0.6rem, 0.8vw, 16px); /* Mírně zmenšeno */
+    margin: clamp(0.3rem, 0.6vh, 10px);
+    color: white;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: 0.3s;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    flex-shrink: 1;
+}
+
+.menu-button:hover {
+    background: rgba(0, 255, 127, 1);
+    transform: scale(1.1);
+}
+
+.menu-button.selected {
+    background: rgba(0, 255, 127, 0.9);
+    color: black;
+}
+
+/* --- POZADÍ (Background Elements) --- */
+.background-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.asteroid {
+    position: absolute;
+    background: gray;
+    width: clamp(8px, 0.8vw, 10px);
+    height: clamp(8px, 0.8vw, 10px);
+    border-radius: 50%;
+    box-shadow: 0 0 clamp(5px, 1vw, 10px) white;
+    animation: moveAsteroids linear infinite;
+}
+
+.planet {
+    position: absolute;
+    width: clamp(100px, 12vw, 150px);
+    height: clamp(100px, 12vw, 150px);
+    background: radial-gradient(circle at 30% 30%, #2f4f4f, #000);
+    border-radius: 50%;
+    box-shadow: 0 0 clamp(10px, 2vw, 20px) rgba(0, 255, 127, 0.7), 0 0 clamp(20px, 4vw, 40px) rgba(0, 255, 127, 0.3);
+    animation: orbitPlanet 6s linear infinite;
+    left: 45%;
+    bottom: 20%;
+}
+
+.city-lights {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 102, 0.4) 5%, transparent 60%);
+    mix-blend-mode: screen;
+    border-radius: 50%;
+    animation: flicker 0.1s infinite;
+}
+
+.moon {
+    position: absolute;
+    width: clamp(20px, 2.5vw, 30px);
+    height: clamp(20px, 2.5vw, 30px);
+    background: radial-gradient(circle, #888, #333);
+    border-radius: 50%;
+    animation: orbitMoon 3s linear infinite;
+    left: 80%;
+    top: 20%;
+}
+
+.wormhole {
+    position: absolute;
+    top: clamp(80px, 8vh, 120px);
+    right: clamp(50px, 5vw, 80px);
+    width: clamp(60px, 6vw, 80px);
+    height: clamp(60px, 6vw, 80px);
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(100, 0, 150, 0.7) 70%, transparent 100%);
+    border-radius: 50%;
+    animation: pulseWormhole 3s ease-in-out infinite;
+}
+
+.star {
+    position: absolute;
+    top: clamp(50px, 5vh, 80px);
+    left: clamp(80px, 8vw, 120px);
+    width: clamp(80px, 8vw, 120px);
+    height: clamp(80px, 8vw, 120px);
+    background: radial-gradient(circle, rgba(255, 69, 0, 1) 20%, rgba(255, 140, 0, 0.8) 50%, transparent 80%);
+    border-radius: 50%;
+    animation: pulsateStar 4s linear infinite;
+}
+
+.comet {
+    position: absolute;
+    width: clamp(10px, 1vw, 15px);
+    height: clamp(10px, 1vw, 15px);
+    background: radial-gradient(circle, white 30%, orange 60%, red 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 clamp(5px, 1vw, 10px) rgba(255, 165, 0, 0.8);
+    animation: moveComet 5s linear infinite;
+}
+
+.comet::after {
+    content: "";
+    position: absolute;
+    width: clamp(30px, 3vw, 50px);
+    height: clamp(5px, 0.5vw, 10px);
+    background: linear-gradient(to right, rgba(255, 69, 0, 0.8), rgba(255, 69, 0, 0.4), transparent);
+    border-radius: 50%;
+    transform: rotate(30deg);
+    left: clamp(-20px, -2vw, -25px);
+    top: 5%;
+    animation: flicker 0.2s infinite alternate;
+}
+
+/* ANIMACE */
+@keyframes moveComet {
+    from {
+        transform: translate(-200px, -200px);
+    }
+    to {
+        transform: translate(100vw, 100vh);
+    }
+}
+
+@keyframes orbitPlanet {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(clamp(10px, 2vw, 20px), clamp(-10px, -2vw, -20px)); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes orbitMoon {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(clamp(15px, 3vw, 30px), clamp(-10px, -2vw, -20px)); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes moveAsteroids {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes pulseWormhole {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+@keyframes pulsateStar {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes flicker {
+    0% { opacity: 0.9; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.9; }
+}
+
+/* Hvězdné pozadí */
+.stars {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 0;
+}
+
+.twinkle-star {
+    position: absolute;
+    width: clamp(1px, 0.15vw, 3px);
+    height: clamp(1px, 0.15vw, 3px);
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+
+/* --- STYLY PRO SEKCI BAREV A SDÍLENÉ TLAČÍTKA --- */
+
+.menu-box {
+    width: 95%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: clamp(0.8rem, 1.8vh, 30px) clamp(1.2rem, 3vw, 50px); /* Zmenšený padding */
+    border-radius: 10px;
+    box-shadow: 0 0 clamp(10px, 2.5vw, 25px) rgba(0, 255, 127, 0.6); /* Zmenšený stín */
+    border: 2px solid #00ff7f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
+    min-height: 0; /* Povolí zmenšení na minimum */
+}
+
+.settings-section {
+    margin-top: clamp(1rem, 2vh, 25px); /* Mírně zmenšený margin */
+    margin-bottom: clamp(1rem, 1.8vh, 20px); /* Mírně zmenšený margin */
+    padding: clamp(0.8rem, 1.5vw, 18px); /* Mírně zmenšený padding */
+    background: rgba(0, 255, 127, 0.2);
+    border: 2px solid #00ff7f;
+    border-radius: clamp(0.8rem, 1.5vw, 18px);
+    box-shadow: 0 0 clamp(6px, 1.2vw, 12px) rgba(0, 255, 127, 0.4); /* Mírně zmenšený stín */
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    flex-shrink: 1; /* Povolí zmenšování sekce */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0; /* Povolí zmenšení na minimum */
+}
+
+.settings-section h2 {
+    font-size: clamp(1.1rem, 1.8vw, 1.6em); /* Mírně zmenšeno */
+    color: #00ff7f;
+    margin-bottom: clamp(0.8rem, 1.2vh, 18px); /* Mírně zmenšeno */
+    text-shadow: 0px 0px clamp(4px, 0.8vw, 8px) #00ff7f; /* Mírně zmenšeno */
+}
+
+.settings-section .language-selector {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.6rem, 1.2vw, 12px); /* Mírně zmenšený gap */
+    flex-wrap: wrap;
+    margin-bottom: clamp(0.8rem, 1.2vh, 18px); /* Mírně zmenšeno */
+}
+
+.settings-section .language-selector .menu-button {
+    width: auto;
+    padding: clamp(0.5rem, 1vh, 8px) clamp(1rem, 2vw, 20px); /* Zmenšený padding */
+    font-size: clamp(0.7rem, 0.9vw, 0.9em); /* Zmenšený font */
+    margin: clamp(0.2rem, 0.5vh, 4px); /* Zmenšený margin */
+    border-radius: clamp(1rem, 1.8vw, 20px); /* Zmenšený border-radius */
+    flex-shrink: 1;
+}
+
+/* --- ROZLOŽENÍ 3 + 2 PRO BAREVNÉ POLOŽKY (BEZ SCROLLU) --- */
+.color-customization .color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centruje položky v řádcích */
+    gap: clamp(1rem, 2vw, 25px); /* Zmenšený gap */
+    margin-top: clamp(0.8rem, 1.2vh, 15px);
+    margin-bottom: clamp(1rem, 1.8vh, 20px);
+    width: 100%;
+    min-height: 0; /* Povolí zmenšení na minimum */
+    flex-shrink: 1; /* Povolí zmenšování gridu */
+}
+
+/* Styl pro prvky 1-3 (Player Ship, Bullet, Missile) */
+.color-customization .color-grid .color-item:nth-child(-n+3) {
+    flex-basis: calc(33.33% - (clamp(1rem, 2vw, 25px) * 2 / 3));
+    max-width: clamp(150px, 18vw, 200px); /* max-width */
+    flex-grow: 1;
+    flex-shrink: 1;
+    box-sizing: border-box;
+}
+
+/* Styl pro prvky 4-5 (Drone Color, Drone Bullet Color) */
+.color-customization .color-grid .color-item:nth-child(n+4) {
+    flex-basis: calc(50% - (clamp(1rem, 2vw, 25px) / 2));
+    max-width: clamp(150px, 18vw, 200px); /* max-width */
+    flex-grow: 1;
+    flex-shrink: 1;
+    box-sizing: border-box;
+    margin-top: clamp(0.8rem, 1.5vh, 15px); /* Mezera mezi řádky */
+}
+
+/* Obecný styl pro color-item */
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Clamp pro gap uvnitř itemu */
+    gap: clamp(0.4rem, 0.8vw, 12px);
+    background: rgba(0, 255, 127, 0.1);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    /* Clamp pro border-radius */
+    border-radius: clamp(0.4rem, 0.8vw, 12px);
+    /* Clamp pro padding */
+    padding: clamp(0.4rem, 0.8vw, 12px);
+    box-shadow: 0 0 clamp(3px, 0.6vw, 6px) rgba(0, 255, 127, 0.2);
+    flex-shrink: 1; /* Umožní zmenšení celého boxu */
+    min-height: 0; /* Důležité pro zmenšování obsahu */
+    /* Necháme min-width spíše obecně a menší, a na mobilu ho úplně zrušíme */
+    min-width: clamp(80px, 8vw, 100px); /* Min-width pro samotný box na desktopu */
+}
+
+.color-item h3 {
+    margin: 0;
+    /* Clamp pro font-size H3 */
+    font-size: clamp(0.6rem, 0.8vw, 1.0em);
+    color: white;
+    text-shadow: none;
+}
+
+.color-item canvas {
+    border: 2px solid #00ff7f;
+    background-color: #0d0d0d;
+    /* Clamp pro canvas (začíná na 20px) */
+    border-radius: clamp(0.3rem, 0.6vw, 6px);
+    width: clamp(20px, 3.5vw, 55px);
+    height: clamp(20px, 3.5vw, 55px);
+    flex-shrink: 0; /* Zabrání zmenšování canvasu pod jeho clamp() hodnotu */
+}
+
+.color-item input[type="color"] {
+    /* Clamp pro input[type="color"] (začíná na 25px/15px) */
+    width: clamp(25px, 4.5vw, 70px);
+    height: clamp(15px, 2.5vw, 35px);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border-radius: clamp(0.2rem, 0.3vw, 4px);
+    overflow: hidden;
+    box-shadow: 0 0 clamp(2px, 0.4vw, 4px) rgba(0, 255, 127, 0.5);
+    flex-shrink: 0; /* Zabrání zmenšování inputu pod jeho clamp() hodnotu */
+}
+
+.color-item input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-item input[type="color"]::-webkit-color-swatch {
+    border: 2px solid #555;
+    border-radius: 3px;
+}
+
+.color-actions {
+    display: flex;
+    gap: clamp(0.8rem, 1.5vw, 15px); /* Zmenšený gap */
+    justify-content: center;
+    margin-top: clamp(1rem, 1.8vh, 20px);
+    flex-wrap: wrap;
+    flex-shrink: 1; /* Povolí zmenšování tlačítek */
+}
+
+.back-to-menu-button,
+.color-action-button {
+    background: rgba(0, 255, 127, 0.2);
+    border: 2px solid #00ff7f;
+    padding: clamp(0.5rem, 1vh, 8px) clamp(1rem, 2vw, 18px); /* Zmenšený padding */
+    color: white;
+    font-size: clamp(0.7rem, 0.9vw, 0.9em); /* Zmenšený font */
+    margin-top: clamp(0.8rem, 1.2vh, 15px);
+    border-radius: clamp(0.4rem, 0.8vw, 8px); /* Zmenšený border-radius */
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    flex-shrink: 1;
+}
+
+.back-to-menu-button:hover,
+.color-action-button:hover {
+    background: rgba(0, 255, 127, 0.5);
+    transform: scale(1.05);
+}
+
+/* --- Upgrades Overlay --- */
+.upgrades-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff7f;
+}
+
+.upgrades-container {
+    background: #111;
+    padding: clamp(1.2rem, 2.5vh, 35px); /* Zmenšený padding */
+    border: 2px solid #00ff7f;
+    border-radius: clamp(0.8rem, 1.5vw, 18px); /* Zmenšený border-radius */
+    box-shadow: 0 0 clamp(8px, 1.8vw, 18px) #00ff7f; /* Zmenšený stín */
+    text-align: center;
+    width: 90%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
+    min-height: 0; /* Povolí zmenšení na minimum */
+}
+
+.upgrades-title {
+    font-size: clamp(1.3rem, 2.2vw, 1.8em); /* Zmenšeno */
+    margin-bottom: clamp(1rem, 1.8vh, 25px); /* Zmenšeno */
+    color: #00ff7f;
+    text-shadow: 0 0 clamp(6px, 1.2vw, 12px) #00ff7f; /* Zmenšeno */
+    flex-shrink: 0;
+}
+
+.upgrades-table {
+    width: 100%;
+    margin: 0 auto clamp(0.6rem, 1.2vh, 15px); /* Zmenšený margin */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1; /* Povolí zmenšování tabulky */
+    gap: clamp(0.4rem, 0.8vh, 12px); /* Zmenšený gap */
+    min-height: 0; /* Povolí zmenšení na minimum */
+}
+
+.upgrade-row {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+    padding-bottom: clamp(0.1rem, 0.3vh, 0.3rem); /* Zmenšený padding */
+    flex-shrink: 1; /* Povolí zmenšování řádku */
+}
+
+.upgrade-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.upgrade-name {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    flex-basis: 30%;
+    border: 2px solid #00ff7f;
+    padding: clamp(0.4rem, 0.8vh, 8px); /* Zmenšený padding */
+    border-radius: clamp(0.4rem, 0.8vw, 8px); /* Zmenšený border-radius */
+    box-sizing: border-box;
+    margin-right: clamp(0.6rem, 1.2vw, 15px); /* Zmenšený margin */
+    font-size: clamp(0.6rem, 0.7vw, 0.8em); /* Zmenšený font */
+    flex-shrink: 0;
+}
+
+.upgrade-description {
+    text-align: left;
+    color: lightgray;
+    font-size: clamp(0.5rem, 0.6vw, 0.7em); /* Zmenšený font */
+    flex-basis: 70%;
+    flex-shrink: 1; /* Povolí zmenšování popisu */
+}
+
+/* --- MEDIA QUERIES (Pro jemné doladění na mobilu) --- */
+@media (max-width: 480px) {
+    html {
+        font-size: clamp(6px, 0.3vw + 0.5vh, 14px); /* Ještě agresivnější zmenšení */
+    }
+
+    /* Na mobilu se položky v color-grid dají pod sebe */
+    .color-customization .color-grid .color-item:nth-child(-n+3),
+    .color-customization .color-grid .color-item:nth-child(n+4) {
+        flex-basis: 90%; /* Téměř celá šířka */
+        max-width: unset; /* Zrušíme max-width, aby se mohl flexibilně zmenšovat */
+        min-width: unset; /* Zrušíme min-width z desktopu */
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: clamp(0.6rem, 1.2vh, 10px); /* Mezera mezi vertikálními položkami */
+    }
+
+    .color-customization .color-grid .color-item:first-child {
+        margin-top: 0; /* První položka nahoře nebude mít horní margin */
+    }
+
+    .color-item {
+        min-width: unset;
+        padding: clamp(0.3rem, 0.6vw, 6px);
+        gap: clamp(0.3rem, 0.6vw, 6px);
+    }
+    .color-item h3 {
+        font-size: clamp(0.45rem, 0.55vw, 0.6em);
+    }
+    .color-item canvas {
+        width: clamp(18px, 2.5vw, 35px);
+        height: clamp(18px, 2.5vw, 35px);
+    }
+    .color-item input[type="color"] {
+        width: clamp(22px, 3vw, 45px);
+        height: clamp(12px, 1.8vw, 22px);
+    }
+
+    .color-actions {
+        flex-direction: column;
+        gap: clamp(0.5rem, 1vh, 8px);
+    }
+    .back-to-menu-button,
+    .color-action-button {
+        width: 80%;
+        max-width: 180px;
+        padding: clamp(0.4rem, 0.8vh, 7px) clamp(0.8rem, 1.5vw, 12px);
+        font-size: clamp(0.6rem, 0.7vw, 0.8em);
+    }
+
+    /* Úpravy pro tabulku upgradů na mobilu */
+    .upgrade-row {
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(0.1rem, 0.2vh, 0.2rem);
+        padding: clamp(0.1rem, 0.2vh, 0.2rem) 0;
+    }
+    .upgrade-name {
+        width: 80%;
+        margin-right: 0;
+        margin-bottom: clamp(0.1rem, 0.2vh, 0.2rem);
+        font-size: clamp(0.5rem, 0.6vw, 0.7em);
+        padding: clamp(0.3rem, 0.6vh, 6px);
+    }
+    .upgrade-description {
+        width: 90%;
+        text-align: center;
+        font-size: clamp(0.4rem, 0.5vw, 0.6em);
+    }
+}

@@ -1,0 +1,27 @@
+
+
+				**Pro spuštění hry stačí jen spustit soubor run.bat**
+
+-----------------------------------------Uživatel musí mít stažené npm a Node.js-----------------------------------------------
+
+
+### Volitelná vlastní ikona pro spouštěcí skript
+
+Pro vylepšení vzhledu spouštěcího souboru `run.bat` si můžete nastavit vlastní ikonu.
+Soubor ikony `Ikonka.ico` je přiložen v asteroids\src\assets.
+
+**Postup pro nastavení vlastní ikony (pouze pro Windows):**
+
+1.  Vytvořte zástupce k souboru `run.bat`:
+    * Pravým tlačítkem myši klikněte na `run.bat`.
+    * Vyberte `Odeslat > Plocha (vytvořit zástupce)` nebo `Vytvořit zástupce`.
+    * (Pokud jste vytvořil zástupce přímo ve složce projektu, můžete ho přesunout poté i na plochu pro snadnější přístup.)
+
+2.  Změňte ikonu zástupce:
+    * Pravým tlačítkem myši klikněte na nově vytvořeného zástupce (např. "run.bat - Zástupce").
+    * Vyberte `Vlastnosti`.
+    * Na záložce `Zástupce` klikněte na tlačítko `Změnit ikonu...`.
+    * Klikněte na `Procházet...` a navigujte se k souboru `Ikona (.ico)` v kořenové složce vašeho projektu(s největší pravděpodobností bude například zde C:\Users\VAŠEJMÉNO\PhpstormProjects\asteroids\src\assets.
+    * Vyberte ikonu a klikněte na `OK`, `Použít` a `OK`.
+
+Váš spouštěcí zástupce bude mít nyní vlastní ikonu!

@@ -1,0 +1,62 @@
+/* src/styles/GameOverScreen.css */
+
+.game-over-overlay { /* Nová třída pro Game Over overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Tmavší pozadí */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001; /* Vyšší z-index, aby byl nad vším */
+    font-family: 'Press Start 2P', cursive;
+    color: #e74c3c; /* Červený text pro Game Over */
+}
+
+.game-over-box { /* Nová třída pro box Game Over */
+    text-align: center;
+    background: #111; /* Tmavé pozadí boxu */
+    padding: 40px;
+    border: 2px solid #e74c3c; /* Červený okraj */
+    border-radius: 20px;
+    box-shadow: 0 0 20px #e74c3c; /* Zářící červený stín */
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-over-title { /* Nová třída pro nadpis */
+    font-size: 2.5em; /* Větší nadpis */
+    margin-bottom: 20px;
+    color: #e74c3c;
+    text-shadow: 0 0 15px #e74c3c; /* Neonový text */
+}
+
+.game-over-score { /* Nová třída pro skóre */
+    font-size: 1.5em;
+    color: #f1c40f; /* Např. žlutá pro skóre */
+    margin-bottom: 20px;
+}
+
+.game-over-button { /* Nová třída pro tlačítko */
+    background: rgba(231, 76, 60, 0.2); /* Průhlednější červené tlačítko */
+    border: 2px solid #e74c3c;
+    padding: 15px 25px;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 5px #e74c3c;
+}
+
+.game-over-button:hover {
+    background: rgba(231, 76, 60, 0.5);
+    box-shadow: 0 0 15px #e74c3c;
+    transform: scale(1.03);
+}

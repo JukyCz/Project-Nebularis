@@ -1,0 +1,12 @@
+/* src/styles/GameCanvas.css */
+
+.game-canvas {
+    display: block; /* Odstraní případnou mezeru pod canvasem */
+    position: absolute; /* Umožní mu vyplnit rodičovský prvek */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Zajistí plnou šířku viewportu */
+    height: 100vh; /* Zajistí plnou výšku viewportu */
+    background-color: black; /* Aby bylo jasné, že je vidět pozadí, pokud není nic nakresleno */
+    z-index: 0; /* Měl by být pod všemi UI prvky */
+}
